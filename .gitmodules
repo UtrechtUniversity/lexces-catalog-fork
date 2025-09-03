@@ -1,3 +1,3 @@
 [submodule "docker/src/ckanext-scheming"]
 	path = docker/src/ckanext-scheming
-	url = https://github.com/ckan/ckanext-scheming
+	url = https://github.com/annhat-ux/ckanext-scheming
