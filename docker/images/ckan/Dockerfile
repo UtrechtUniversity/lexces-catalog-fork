@@ -58,8 +58,6 @@ ENV CKAN_CONFIG /etc/ckan
 ENV CKAN_STORAGE_PATH=/ckanstorage
 ENV CKAN_VERSION=2.11.0
 
-ENV CKAN_SCHEMING_VERSION=release-3.0.0
-
 # Create storage path
 RUN mkdir -p $CKAN_STORAGE_PATH/webassets $CKAN_STORAGE_PATH/storage && \
     chown -R www-data:www-data $CKAN_STORAGE_PATH
@@ -89,10 +87,9 @@ RUN ckan-pip3 install -U pip && \
     ckan-pip3 install setuptools-scm==7.1.0 && \
     ckan-pip3 install wheel && \
     ckan-pip3 install -e "git+https://github.com/ckan/ckan@ckan-${CKAN_VERSION}#egg=ckan[requirements]" && \
-    ckan-pip3 install -e "git+https://github.com/ckan/ckanext-scheming@${CKAN_SCHEMING_VERSION}#egg=ckanext-scheming" && \
     ckan-pip3 install uwsgi && \
     ln -s $CKAN_VENV/src/ckan/ckan/config/who.ini $CKAN_CONFIG/who.ini && \
-    chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH 
+    chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH
 
 ADD ./ckan-entrypoint.sh /ckan-entrypoint.sh
 ENTRYPOINT ["/ckan-entrypoint.sh"]
